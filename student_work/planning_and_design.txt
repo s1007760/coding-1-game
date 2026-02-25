@@ -26,6 +26,9 @@ original spawning point, & 1 of three lives dissapears. All 3 run out, game ends
 and you can restart the whole thing.
 
 Major Game Elements:
+
+goal: collect all pellets and avoid touching ghosts
+
 ghost icon: U+1F47B
 pacman normal moving icon: U+1F63C
 pacman eating pellet icon: U+1F638
@@ -43,6 +46,12 @@ Scoring System:
 -print score change
 -death: 3 lives, if hits the enemies = -1 live. 
 --Win and lose--
--if pellet number = 0, game = win.
+-if pellet number = 0, game = win. 
+-"play again?: " is printed and if user_input "yes" then recalls the main game function to replay.
 
 Gameplay Process:
+-player spawns in, presses WASD to move pacman around through the maze
+-Three ghosts move randomly, probably using a random number generator that
+runs in a forever loop for direction choosing.
+-When all pellets are collected the game ends, and the player has the option to type 'replay'
+to replay the game.
