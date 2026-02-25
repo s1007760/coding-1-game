@@ -41,7 +41,7 @@ Scoring System:
 -detect that if pacman_touches_object(pacman, pellet): then 1 is += to global score variable.
 -and also pellet is removed from the screen, pellet number is -= by 1.
 -print score change
-
+-death: 3 lives, if hits the enemies = -1 live. 
 --Win and lose--
 -if pellet number = 0, game = win.
 
