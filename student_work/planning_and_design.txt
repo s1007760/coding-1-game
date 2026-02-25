@@ -44,7 +44,9 @@ Scoring System:
 -detect that if pacman_touches_object(pacman, pellet): then 1 is += to global score variable.
 -and also pellet is removed from the screen, pellet number is -= by 1.
 -print score change
+
 -death: 3 lives, if hits the enemies = -1 live. 
+
 --Win and lose--
 -if pellet number = 0, game = win. 
 -"play again?: " is printed and if user_input "yes" then recalls the main game function to replay.
@@ -55,3 +57,5 @@ Gameplay Process:
 runs in a forever loop for direction choosing.
 -When all pellets are collected the game ends, and the player has the option to type 'replay'
 to replay the game.
+
+Expansion Ideas: If have time we can add the special pellet that lets pacman eat the ghosts.
