@@ -39,6 +39,10 @@ Scoring System:
 -initialize score variable = 0
 -start function, take pacman and pellet as arguments,
 -detect that if pacman_touches_object(pacman, pellet): then 1 is += to global score variable.
+-and also pellet is removed from the screen, pellet number is -= by 1.
+-print score change
 
+--Win and lose--
+-if pellet number = 0, game = win.
 
 Gameplay Process:
