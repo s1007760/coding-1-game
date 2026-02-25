@@ -11,12 +11,34 @@ Part I: Planning & Design (15 pts)
 * Outline expansion ideas
 
 Game Idea:
-
+Classic Pacman. Player will control pacman to eat all pellets and avoid
+touching the ghosts. Will not include the special pellet that lets you
+eat ghosts.
 
 Game Rules:
-
+Path is created with barriers the player and ghosts cannot move through. 
+Ghosts move randomly/independently.
+Player presses WASD to move pacman, when he runs into a pellet it dissapears
+and a point is added to score. 
+When all pellets are collected the game ends and player wins. 
+If you get eaten by a ghost you die, pacman dissapears, you respawn back at 
+original spawning point, & 1 of three lives dissapears. All 3 run out, game ends
+and you can restart the whole thing.
 
 Major Game Elements:
+ghost icon: U+1F47B
+pacman normal moving icon: U+1F63C
+pacman eating pellet icon: U+1F638
+pacman dying icon: U+1F640
+
+wall icon: U+1F9CD	(using the man standing emoji cause that's funny)
+
+Board size: 10 by 10
+
+Scoring System: 
+-initialize score variable = 0
+-start function, take pacman and pellet as arguments,
+-detect that if pacman_touches_object(pacman, pellet): then 1 is += to global score variable.
 
 
 Gameplay Process:
