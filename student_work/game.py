@@ -30,7 +30,7 @@ game_data = {
     'pac_cat_eating': "\U0001F638",
     'pac_cat_dying': "\U0001F640",
     'ghost': "\U0001F47B",
-    'wall': "\U0001F4D7 ",
+    'wall': "\U0001F4D7",
     'pellet': "\U0001F9C0",
     'empty': "  "
 }
