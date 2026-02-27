@@ -34,6 +34,8 @@ pacman normal moving icon: U+1F63C
 pacman eating pellet icon: U+1F638
 pacman dying icon: U+1F640
 
+pellets: U+1F9C0
+
 wall icon: U+1F9CD	(using the man standing emoji cause that's funny)
 
 Board size: 10 by 10
