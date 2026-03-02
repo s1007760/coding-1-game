@@ -6,7 +6,7 @@ game_data = {
     'height': 10,
     'player': {"x": 0, "y": 0, "score": 0}, #, "energy": 10, "max_energy": 10},
     'ghost_pos': {"x": 4, "y": 4},
-    'collectibles': [
+    'pellets': [
         {"x": 2, "y": 1, "collected": False},
     ],
     'walls': [
@@ -45,15 +45,15 @@ def draw_board(screen): #was originally screen
             # Player
             if x == game_data['player']['x'] and y == game_data['player']['y']:
                 row += game_data['pac_cat_moving']
-            # Eagle
+            # Ghost
             elif x == game_data['ghost_pos']['x'] and y == game_data['ghost_pos']['y']:
                 row += game_data['ghost']
-            # Obstacles
+            # Walls
             elif any(o['x'] == x and y in o['y'] for o in game_data['walls']):
                 row += game_data['wall']
 
-            # Collectibles
-            elif any(c['x'] == x and c['y'] == y and not c['collected'] for c in game_data['collectibles']):
+            # pellets
+            elif any(c['x'] == x and c['y'] == y and not c['collected'] for c in game_data['pellets']):
                 row += game_data['pellet']
             else:
                 row += game_data['empty']
@@ -65,6 +65,28 @@ def draw_board(screen): #was originally screen
     screen.refresh()
     screen.getkey()  # pause so player can see board
 
-curses.wrapper(draw_board)
+def player_movement():
+    x = game_data['player']['x']
+    y = game_data['player']['y']
 
-# Good Luck!
+    next_x, next_y = x, y #setting up the old x and y turning into the new location
+    key_pressed = key
+    if key_pressed == "w" and y >= 0:
+        next_y -= 1 #moving up
+    elif key_pressed == "s" and y <= 9:
+        
+    elif key_pressed == "a" and x >= 0:
+        next_x -= 1 #moving left
+    elif key_pressed
+
+def adding_to_score():
+
+def main_calling_function(game_data):
+    game_data['player']['score'] = 0
+
+curses.wrapper(draw_board)
+#-initialize score variable = 0
+#-start function, take pacman and pellet as arguments,
+#-detect that if pacman_touches_object(pacman, pellet): then 1 is += to global score variable.
+#-and also pellet is removed from the screen, pellet number is -= by 1.
+#-print score change
