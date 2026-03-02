@@ -11,18 +11,19 @@ game_data = {
         {"x": 2, "y": 1, "collected": False},
     ],
     'walls': [
-    {"x": 1, "y": 2},
-    {"x": 3, "y": 0},        
-    {"x": 3, "y": 1},
-    {"x": 1, "y": 3},
-    {"x": 1, "y": 4},
-    {"x": 1, "y": 6},
-    {"x": 2, "y": 6},
-    {"x": 3, "y": 6},
-    {"x": 3, "y": 7},
-    {"x": 5, "y": 7},
-    {"x": 5, "y": 7},
-    {"x": 8, "y": [0, 4, 7]}  #try and get rid of this list and see what happens, not quite working yet
+    {"x": 1, "y": [2, 3]},
+    {"x": 2, "y": [2, 4, 9]},        
+    {"x": 3, "y": [1]},
+    {"x": 8, "y": [0, 1, 2, 4, 5, 6, 7, 8, 9]}, # Hole at y=3
+   # {"x": 1, "y": 3},
+   # {"x": 1, "y": 4},
+   # {"x": 1, "y": 6},
+   # {"x": 2, "y": 6},
+   # {"x": 3, "y": 6},
+   # {"x": 3, "y": 7},
+   # {"x": 5, "y": 7},
+   # {"x": 5, "y": 7},
+   # {"x": 8, "y": 8}  #try and get rid of this list and see what happens, not quite working yet
     ],
 
     # ASCII icons
@@ -52,10 +53,12 @@ def draw_board(screen): #was originally screen
             elif x == game_data['ghost_pos']['x'] and y == game_data['ghost_pos']['y']:
                 row += game_data['ghost']
             # Obstacles
-            elif any(o['x'] == x and o['y'] == y for o in game_data['walls']):
+            elif any(o['x'] == x and y in o['y'] for o in game_data['walls']):
                 row += game_data['wall']
-            elif x == 8 and any(o['y'] == y for o in game_data['walls']):
-                row += game_data['wall'] # trying to make it to where if x equal 8 it prints wall in the whole line,
+            #elif any(o['x'] == x and o['y'] == y for o in game_data['walls']):
+                #row += game_data['wall']
+            #elif x == 8 and any(o['y'] == y for o in game_data['walls']):
+               # row += game_data['wall'] # trying to make it to where if x equal 8 it prints wall in the whole line,
                 #except for certain y values that will be listed as multiple keys for one x up above, for those there
                 #will be holes in the walls
 
