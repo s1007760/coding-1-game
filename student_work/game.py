@@ -1,4 +1,5 @@
 import curses 
+import random 
 
 game_data = {
     # Store board dimensions, player/enemy positions, score, energy, collectibles, and icons
@@ -105,21 +106,28 @@ def player_movement(key_pressed):
 
 #def spawn_pellets():
 
+#I'll put in more cheese, then we need:
+# -when run into cheese pellets it dissapears, and score goes up by 1.
+# -score is displayed at bottom along with moves survived
+# 
+#when all cheeses are collected, game ends and player wins.
+
 #def adding_to_score():
+#for cheese score?
 
-#def move_ghost():
-  #  directions = [(0, -1), (0, 1), (-1, 0), (1, 0)]
-  #  random.shuffle(directions)
-  #  ghost_x, ghost_y = game_data['ghost_pos']['x'], game_data['ghost_pos']['y']
+def move_ghost():
+    directions = [(0, -1), (0, 1), (-1, 0), (1, 0)]
+    random.shuffle(directions)
+    ghost_x, ghost_y = game_data['ghost_pos']['x'], game_data['ghost_pos']['y']
 
- #   for ghost_x, ghost_y in directions:
-  #      new_ghost_x = ghost_x + dx
-  #      new_y = ey + dy
-  #      if 0 <= new_x < game_data['width'] and 0 <= new_y < game_data['height']:
-  #          if not any(o['x'] == new_x and o['y'] == new_y for o in game_data['obstacles']):
-  #              game_data['eagle_pos']['x'] = new_x
- #               game_data['eagle_pos']['y'] = new_y
-   #             break
+    for direction_x, direction_y in directions:
+        new_ghost_x = ghost_x + direction_x
+        new_ghost_y = ghost_y + direction_y
+        if 0 <= new_ghost_x < game_data['width'] and 0 <= new_ghost_y < game_data['height']:
+            if not any(o['x'] == new_ghost_x and o['y'] == new_ghost_y for o in game_data['walls']):
+                game_data['ghost_pos']['x'] = new_ghost_x
+                game_data['ghost_pos']['y'] = new_ghost_y
+                break
 
 def main_function(stdscr): #**need a while true loop to keep the game running,
                                  #else it just runs once and stops, not connected to player movement.
@@ -134,7 +142,7 @@ def main_function(stdscr): #**need a while true loop to keep the game running,
             continue 
         player_movement(key)
 
-      #  move_ghost()
+        move_ghost()
        # spawn_pellets()
 
         draw_board(stdscr)
