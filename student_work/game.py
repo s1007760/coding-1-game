@@ -124,7 +124,13 @@ def move_ghost():
         new_ghost_x = ghost_x + direction_x
         new_ghost_y = ghost_y + direction_y
         if 0 <= new_ghost_x < game_data['width'] and 0 <= new_ghost_y < game_data['height']:
-            if not any(o['x'] == new_ghost_x and o['y'] == new_ghost_y for o in game_data['walls']):
+            is_wall = False
+            for wall in game_data['walls']:
+                if new_ghost_x == wall['x'] and new_ghost_y == wall['y']:
+                    is_wall = True
+                    break
+           # if not any(o['x'] == new_ghost_x and o['y'] == new_ghost_y for o in game_data['walls']):
+            if not is_wall:
                 game_data['ghost_pos']['x'] = new_ghost_x
                 game_data['ghost_pos']['y'] = new_ghost_y
                 break
