@@ -32,13 +32,13 @@ game_data = {
     'empty': "  "
 }
 
-def draw_board(screen): #was originally screen
+def draw_board(stdscr): #was originally screen
     # Print the board and all game elements using curses
     curses.start_color()
     curses.use_default_colors()
     curses.init_pair(1, curses.COLOR_WHITE, -1)
 
-    screen.clear()
+    stdscr.clear()
     for y in range(game_data['height']):
         row = ""
         for x in range(game_data['width']):
@@ -65,26 +65,55 @@ def draw_board(screen): #was originally screen
     screen.refresh()
     screen.getkey()  # pause so player can see board
 
-def player_movement():
+def player_movement(key_pressed):
     x = game_data['player']['x']
     y = game_data['player']['y']
-
     next_x, next_y = x, y #setting up the old x and y turning into the new location
-    key_pressed = key
+
+    key_pressed = key.lowered()
     if key_pressed == "w" and y >= 0:
         next_y -= 1 #moving up
     elif key_pressed == "s" and y <= 9:
-        
+        next_y += 1 #moving down
     elif key_pressed == "a" and x >= 0:
         next_x -= 1 #moving left
-    elif key_pressed
+    elif key_pressed == "d" and x <= 9:
+        next_x += 1 #moving right
+    else:
+        return  # Invalid key or move off board
 
-def adding_to_score():
+    # Check for obstacles
+    if any(o['x'] == next_x and o['y'] == next_y for o in game_data['walls']):
+        return # return as in don't move but keep checking for more input.
 
-def main_calling_function(game_data):
-    game_data['player']['score'] = 0
+    # Update position and increment score
+    game_data['player']['x'] = next_x
+    game_data['player']['y'] = next_y
+    game_data['player']['score'] += 1
 
-curses.wrapper(draw_board)
+#def adding_to_score():
+
+def main_function(stdscr): #**need a while true loop to keep the game running,
+                                 #else it just runs once and stops, not connected to player movement.
+    curses.curs_set(0)
+    #stdscr.nodelay(True)
+
+    while True:
+        draw_board(stdscr)
+        try:
+            key = stdscr.getkey()
+        except:
+            continue 
+        player_movement(key_pressed)
+        draw_board(stdscr)
+  #  game_data['player']['score'] = 0
+
+
+#curses.wrapper(draw_board)
+#curses.wrapper(player_movement)  #The curses makes the code recognize keyboard input?
+curses.wrapper(main_function)
+
+
 #-initialize score variable = 0
 #-start function, take pacman and pellet as arguments,
 #-detect that if pacman_touches_object(pacman, pellet): then 1 is += to global score variable.
