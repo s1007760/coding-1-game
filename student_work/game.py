@@ -82,9 +82,9 @@ def player_movement(key_pressed):
     else:
         return  # Invalid key or move off board
 
-    # Check for obstacles
-    if any(o['x'] == next_x and o['y'] == next_y for o in game_data['walls']):
-        return # return as in don't move but keep checking for more input.
+    for wall in game_data['walls']:
+        if next_x == wall['x'] and next_y in wall['y']:
+            return # return as in don't move but keep checking for more input.
 
     # Update position and increment score
     game_data['player']['x'] = next_x
