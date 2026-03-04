@@ -73,11 +73,11 @@ def player_movement(key_pressed):
     key_pressed = key_pressed.lower()
     if key_pressed == "w" and y >= 0:
         next_y -= 1 #moving up
-    elif key_pressed == "s" and y <= 9:
+    elif key_pressed == "s" and y < game_data['height'] - 1:
         next_y += 1 #moving down
     elif key_pressed == "a" and x >= 0:
         next_x -= 1 #moving left
-    elif key_pressed == "d" and x <= 9:
+    elif key_pressed == "d" and x < game_data['height'] - 1:
         next_x += 1 #moving right
     else:
         return  # Invalid key or move off board
