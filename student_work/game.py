@@ -114,6 +114,12 @@ def player_movement(key_pressed):
 
 #def adding_to_score():
 #for cheese score?
+def adding_to_score():
+    for pellet in game_data['pellet']:
+        if pellet['x'] == game_data['player']['x'] and pellet['y'] == game_data['player']['y'] and not pellet['collected']:
+            pellet['collected'] = True 
+            game_data['player']['score'] += 1
+
 
 def move_ghost():
     directions = [(0, -1), (0, 1), (-1, 0), (1, 0)]
