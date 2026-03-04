@@ -59,18 +59,18 @@ def draw_board(stdscr): #was originally screen
                 row += game_data['empty']
         #screen.addstr(y, 0, row, curses.color_pair(1))
             try:
-                screen.addstr(y, 0, row, curses.color_pair(1))
+                stdscr.addstr(y, 0, row, curses.color_pair(1))
             except curses.error:
                 pass
-    screen.refresh()
-    screen.getkey()  # pause so player can see board
+    stdscr.refresh()
+  #  stdscr.getkey()  # pause so player can see board
 
 def player_movement(key_pressed):
     x = game_data['player']['x']
     y = game_data['player']['y']
     next_x, next_y = x, y #setting up the old x and y turning into the new location
 
-    key_pressed = key.lowered()
+    key_pressed = key_pressed.lower()
     if key_pressed == "w" and y >= 0:
         next_y -= 1 #moving up
     elif key_pressed == "s" and y <= 9:
@@ -104,7 +104,7 @@ def main_function(stdscr): #**need a while true loop to keep the game running,
             key = stdscr.getkey()
         except:
             continue 
-        player_movement(key_pressed)
+        player_movement(key)
         draw_board(stdscr)
   #  game_data['player']['score'] = 0
 
