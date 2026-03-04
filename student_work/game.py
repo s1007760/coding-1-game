@@ -129,17 +129,22 @@ def move_ghost():
     for direction_x, direction_y in directions:
         new_ghost_x = ghost_x + direction_x
         new_ghost_y = ghost_y + direction_y
+
+        #boundary
         if 0 <= new_ghost_x < game_data['width'] and 0 <= new_ghost_y < game_data['height']:
-            is_wall = False
-            for wall in game_data['walls']:
-                if new_ghost_x == wall['x'] and new_ghost_y == wall['y']:
-                    is_wall = True
-                    break
-           # if not any(o['x'] == new_ghost_x and o['y'] == new_ghost_y for o in game_data['walls']):
+            #wall collision
+            is_wall = any(o['x'] == new_ghost_x and o['y'] == new_ghost_y for o in game_data['walls'])
+            #is_wall = False
+            #for wall in game_data['walls']:
+             #   if new_ghost_x == wall['x'] and new_ghost_y == wall['y']:
+             #       is_wall = True
+              #      break
+            ##FIGURE OUT PROB.
             if not is_wall:
                 game_data['ghost_pos']['x'] = new_ghost_x
                 game_data['ghost_pos']['y'] = new_ghost_y
                 break
+
 
 def main_function(stdscr): #**need a while true loop to keep the game running,
                                  #else it just runs once and stops, not connected to player movement.
