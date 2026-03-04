@@ -62,8 +62,19 @@ def draw_board(stdscr): #was originally screen
                 stdscr.addstr(y, 0, row, curses.color_pair(1))
             except curses.error:
                 pass
+        
+    #I just copied this, but it works.
+    try:
+        stdscr.addstr(game_data['height'] + 1, 0,
+                  f"Moves Survived: {game_data['player']['score']}",
+                  curses.color_pair(1))
+        stdscr.addstr(game_data['height'] + 2, 0,
+                  "Move with W/A/S/D, Q to quit",
+                  curses.color_pair(1))
+    except curses.error:
+        pass # Ignore error if terminal is too small
     stdscr.refresh()
-  #  stdscr.getkey()  # pause so player can see board
+
 
 def player_movement(key_pressed):
     x = game_data['player']['x']
@@ -91,7 +102,24 @@ def player_movement(key_pressed):
     game_data['player']['y'] = next_y
     game_data['player']['score'] += 1
 
+
+#def spawn_pellets():
+
 #def adding_to_score():
+
+#def move_ghost():
+  #  directions = [(0, -1), (0, 1), (-1, 0), (1, 0)]
+  #  random.shuffle(directions)
+  #  ghost_x, ghost_y = game_data['ghost_pos']['x'], game_data['ghost_pos']['y']
+
+ #   for ghost_x, ghost_y in directions:
+  #      new_ghost_x = ghost_x + dx
+  #      new_y = ey + dy
+  #      if 0 <= new_x < game_data['width'] and 0 <= new_y < game_data['height']:
+  #          if not any(o['x'] == new_x and o['y'] == new_y for o in game_data['obstacles']):
+  #              game_data['eagle_pos']['x'] = new_x
+ #               game_data['eagle_pos']['y'] = new_y
+   #             break
 
 def main_function(stdscr): #**need a while true loop to keep the game running,
                                  #else it just runs once and stops, not connected to player movement.
@@ -105,7 +133,13 @@ def main_function(stdscr): #**need a while true loop to keep the game running,
         except:
             continue 
         player_movement(key)
+
+      #  move_ghost()
+       # spawn_pellets()
+
         draw_board(stdscr)
+       # time.sleep(0.2)
+
   #  game_data['player']['score'] = 0
 
 
