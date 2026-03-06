@@ -10,6 +10,12 @@ game_data = {
     'pellets': [
         {"x": 2, "y": 1, "collected": False},
         {"x": 2, "y": 2, "collected": False},
+        {"x": 4, "y": 5, "collected": False},
+        {"x": 7, "y": 5, "collected": False},
+        {"x": 2, "y": 7, "collected": False},
+        {"x": 8, "y": 9, "collected": False},
+        {"x": 4, "y": 9, "collected": False},
+        {"x": 6, "y": 3, "collected": False},
     ],
     'walls': [
     {"x": 0, "y": [8]},
@@ -115,8 +121,9 @@ def player_movement(key_pressed):
 #when all cheeses are collected, game ends and player wins.
 
 def adding_to_score():
-    for pellet in game_data['pellets'][:]:
-        if game_data['player']['x'] == game_data['pellets'][0]['x'] and game_data['player']['y'] == game_data['pellets'][0]['y']:
+    for pellet in game_data['pellets']: #writing game_data['pellets'] mmakes it already run and check each value 1 through 10, so you only need to
+    #write pellet['x']
+        if game_data['player']['x'] == pellet['x'] and game_data['player']['y'] == pellet['y']:
             game_data['player']['score'] += 10
             game_data['pellets'].remove(pellet)
         #if not game_data['pellets']:
