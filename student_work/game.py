@@ -9,6 +9,7 @@ game_data = {
     'ghost_pos': {"x": 4, "y": 4},
     'pellets': [
         {"x": 2, "y": 1, "collected": False},
+        {"x": 2, "y": 2, "collected": False},
     ],
     'walls': [
     {"x": 0, "y": [8]},
@@ -101,7 +102,8 @@ def player_movement(key_pressed):
     # Update position and increment score
     game_data['player']['x'] = next_x
     game_data['player']['y'] = next_y
-    game_data['player']['score'] += 1
+    #game_data['player']['score'] += 1
+
 
 
 #def spawn_pellets():
@@ -112,13 +114,21 @@ def player_movement(key_pressed):
 # 
 #when all cheeses are collected, game ends and player wins.
 
-#def adding_to_score():
-#for cheese score?
 def adding_to_score():
-    for pellet in game_data['pellet']:
-        if pellet['x'] == game_data['player']['x'] and pellet['y'] == game_data['player']['y'] and not pellet['collected']:
-            pellet['collected'] = True 
-            game_data['player']['score'] += 1
+    for pellet in game_data['pellets'][:]:
+        if game_data['player']['x'] == game_data['pellets'][0]['x'] and game_data['player']['y'] == game_data['pellets'][0]['y']:
+            game_data['player']['score'] += 10
+            game_data['pellets'].remove(pellet)
+        #if not game_data['pellets']:
+           # print("you win")
+
+
+#for cheese score?
+#def adding_to_score():
+   # for pellet in game_data['pellet']:
+      #  if pellet['x'] == game_data['player']['x'] and pellet['y'] == game_data['player']['y'] and not pellet['collected']:
+            #pellet['collected'] = True 
+           # game_data['player']['score'] += 1
 
 
 def move_ghost():
@@ -157,12 +167,16 @@ def main_function(stdscr): #**need a while true loop to keep the game running,
             key = stdscr.getkey()
         except:
             continue 
-        player_movement(key)
+        if key:
+            if key == "q":
+                break
+            player_movement(key)
 
-        move_ghost()
+            move_ghost()
+            adding_to_score()
        # spawn_pellets()
 
-        draw_board(stdscr)
+            draw_board(stdscr)
        # time.sleep(0.2)
 
   #  game_data['player']['score'] = 0
