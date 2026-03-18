@@ -7,6 +7,8 @@ game_data = {
     'height': 10,
     'player': {"x": 0, "y": 0, "score": 0}, #, "energy": 10, "max_energy": 10},
     'ghost_pos': {"x": 4, "y": 4},
+    'won': False,
+    'loss': False,
     'pellets': [
         {"x": 2, "y": 1, "collected": False},
         {"x": 2, "y": 2, "collected": False},
@@ -137,11 +139,15 @@ def adding_to_score():
             #pellet['collected'] = True 
            # game_data['player']['score'] += 1
 #win/loss 
-#def check_win():
-    #return len(game_data['pellet']) == 0
-#def check_loss():
-    #return game_data['player']['x'] == game_data['ghost_pos']['x'] and game_data['player']['y'] == game_data['ghost_pos']['y']
-
+def check_win():
+    #return len(game_data['pellets']) == 0
+    if game_data['player']['score'] == 40:
+        game_data['won'] = True
+        return True 
+def check_loss():
+    if game_data['player']['x'] == game_data['ghost_pos']['x'] and game_data['player']['y'] == game_data['ghost_pos']['y']:
+        game_data['loss'] = True
+        return True
 def move_ghost():
     directions = [(0, -1), (0, 1), (-1, 0), (1, 0)]
     random.shuffle(directions)
@@ -188,15 +194,32 @@ def main_function(stdscr): #**need a while true loop to keep the game running,
        # spawn_pellets()
 
             draw_board(stdscr)
-       # time.sleep(0.2)
 
-  #  game_data['player']['score'] = 0
+            check_win()
+            check_loss()
+        if game_data['won'] == True:
+            #stdscr.addstr(game_data['height'] + 3, 0,
+            #      "YOU WIN!",
+            #      curses.color_pair(1))
+            #stdscr.refresh
+            #print("You win!")
+            break
+        if game_data['loss'] == True:
+            break
+       # time.sleep(0.2)
 
 
 #curses.wrapper(draw_board)
 #curses.wrapper(player_movement)  #The curses makes the code recognize keyboard input?
 curses.wrapper(main_function)
 
+def displaying_end_game():
+    if game_data['won'] == True:
+        print("YOU WIN!")
+    if game_data['loss'] == True:
+        print("YOU LOST! :(")
+
+displaying_end_game()
 
 #-initialize score variable = 0
 #-start function, take pacman and pellet as arguments,
