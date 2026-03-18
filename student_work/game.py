@@ -136,7 +136,11 @@ def adding_to_score():
       #  if pellet['x'] == game_data['player']['x'] and pellet['y'] == game_data['player']['y'] and not pellet['collected']:
             #pellet['collected'] = True 
            # game_data['player']['score'] += 1
-
+#win/loss 
+#def check_win():
+    #return len(game_data['pellet']) == 0
+#def check_loss():
+    #return game_data['player']['x'] == game_data['ghost_pos']['x'] and game_data['player']['y'] == game_data['ghost_pos']['y']
 
 def move_ghost():
     directions = [(0, -1), (0, 1), (-1, 0), (1, 0)]
