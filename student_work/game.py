@@ -76,13 +76,13 @@ def draw_board(stdscr): #was originally screen
     #I just copied this, but it works.
     try:
         stdscr.addstr(game_data['height'] + 1, 0,
-                  f"Moves Survived: {game_data['player']['score']}",
+                  f"Cheeses Collected: {game_data['player']['score']}",
                   curses.color_pair(1))
         stdscr.addstr(game_data['height'] + 2, 0,
                   "Move with W/A/S/D, Q to quit",
                   curses.color_pair(1))
     except curses.error:
-        pass # Ignore error if terminal is too small
+        pass # Ignores error if terminal is too small
     stdscr.refresh()
 
 
@@ -110,11 +110,7 @@ def player_movement(key_pressed):
     # Update position and increment score
     game_data['player']['x'] = next_x
     game_data['player']['y'] = next_y
-    #game_data['player']['score'] += 1
 
-
-
-#def spawn_pellets():
 
 #I'll put in more cheese, then we need:
 # -when run into cheese pellets it dissapears, and score goes up by 1.
@@ -123,12 +119,12 @@ def player_movement(key_pressed):
 #when all cheeses are collected, game ends and player wins.
 
 def adding_to_score():
-    for pellet in game_data['pellets']: #writing game_data['pellets'] mmakes it already run and check each value 1 through 10, so you only need to
-    #write pellet['x']
+    for pellet in game_data['pellets']: #writing game_data['pellets'] makes it already run and check each value 1 through 10, so you only need to
+                                        #write pellet['x'] later, not the whole thing
         if game_data['player']['x'] == pellet['x'] and game_data['player']['y'] == pellet['y']:
             game_data['player']['score'] += 10
             game_data['pellets'].remove(pellet)
-        #if not game_data['pellets']:
+        #if not game_data['pellets']:  #basic logic for later
            # print("you win")
 
 
@@ -148,6 +144,7 @@ def check_loss():
     if game_data['player']['x'] == game_data['ghost_pos']['x'] and game_data['player']['y'] == game_data['ghost_pos']['y']:
         game_data['loss'] = True
         return True
+
 def move_ghost():
     directions = [(0, -1), (0, 1), (-1, 0), (1, 0)]
     random.shuffle(directions)
@@ -166,7 +163,6 @@ def move_ghost():
              #  if new_ghost_x == wall['x'] and new_ghost_y == wall['y']:
             #    return
 
-            ##FIGURE OUT PROB.
             #if is_wall:
             #    return
             #if not is_wall:
@@ -193,26 +189,16 @@ def main_function(stdscr): #**need a while true loop to keep the game running,
 
             move_ghost()
             adding_to_score()
-       # spawn_pellets()
 
             draw_board(stdscr)
 
             check_win()
             check_loss()
         if game_data['won'] == True:
-            #stdscr.addstr(game_data['height'] + 3, 0,
-            #      "YOU WIN!",
-            #      curses.color_pair(1))
-            #stdscr.refresh
-            #print("You win!")
             break
         if game_data['loss'] == True:
             break
-       # time.sleep(0.2)
 
-
-#curses.wrapper(draw_board)
-#curses.wrapper(player_movement)  #The curses makes the code recognize keyboard input?
 curses.wrapper(main_function)
 
 def displaying_end_game():
