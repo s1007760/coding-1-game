@@ -12,12 +12,12 @@ game_data = {
     'pellets': [
         {"x": 2, "y": 1, "collected": False},
         {"x": 2, "y": 2, "collected": False},
-        {"x": 4, "y": 5, "collected": False},
+        {"x": 3, "y": 6, "collected": False},
         {"x": 7, "y": 5, "collected": False},
-        {"x": 2, "y": 7, "collected": False},
+        {"x": 2, "y": 8, "collected": False},
         {"x": 8, "y": 9, "collected": False},
         {"x": 4, "y": 9, "collected": False},
-        {"x": 6, "y": 3, "collected": False},
+        {"x": 0, "y": 9, "collected": False},
     ],
     'walls': [
     {"x": 0, "y": [8]},
@@ -141,7 +141,7 @@ def adding_to_score():
 #win/loss 
 def check_win():
     #return len(game_data['pellets']) == 0
-    if game_data['player']['score'] == 40:
+    if game_data['player']['score'] == 70:
         game_data['won'] = True
         return True 
 def check_loss():
@@ -157,20 +157,22 @@ def move_ghost():
         new_ghost_x = ghost_x + direction_x
         new_ghost_y = ghost_y + direction_y
 
+        for wall in game_data['walls']:
         #boundary
-        if 0 <= new_ghost_x < game_data['width'] and 0 <= new_ghost_y < game_data['height']:
-            #wall collision
-            is_wall = any(o['x'] == new_ghost_x and o['y'] == new_ghost_y for o in game_data['walls'])
+            if 0 <= new_ghost_x < game_data['width'] and 0 <= new_ghost_y < game_data['height']:
+                if not any(o['x'] == new_ghost_x and o['y'] == new_ghost_y for o in game_data['walls']):
             #is_wall = False
             #for wall in game_data['walls']:
-             #   if new_ghost_x == wall['x'] and new_ghost_y == wall['y']:
-             #       is_wall = True
-              #      break
+             #  if new_ghost_x == wall['x'] and new_ghost_y == wall['y']:
+            #    return
+
             ##FIGURE OUT PROB.
-            if not is_wall:
-                game_data['ghost_pos']['x'] = new_ghost_x
-                game_data['ghost_pos']['y'] = new_ghost_y
-                break
+            #if is_wall:
+            #    return
+            #if not is_wall:
+                    game_data['ghost_pos']['x'] = new_ghost_x
+                    game_data['ghost_pos']['y'] = new_ghost_y
+                    break
 
 
 def main_function(stdscr): #**need a while true loop to keep the game running,
@@ -215,9 +217,9 @@ curses.wrapper(main_function)
 
 def displaying_end_game():
     if game_data['won'] == True:
-        print("YOU WIN!")
+        print("\n\n\nYOU WIN! :)\n\n\n")
     if game_data['loss'] == True:
-        print("YOU LOST! :(")
+        print("\n\n\nYOU LOST! :(\n\n\n")
 
 displaying_end_game()
 
